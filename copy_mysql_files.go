@@ -22,7 +22,7 @@ func copyMyCNF(uAccount, mysqlS string) {
 
 	if err != nil {
 		fmt.Println("\n ❌  Couldn't copy my.cnf into MySQL Server /tmp")
-		fmt.Println(err)
+		fmt.Println("\n Is sshpass installed? (execute \"sudo yum -y install sshpass\")")
 		panic(err)
 	}
 }
