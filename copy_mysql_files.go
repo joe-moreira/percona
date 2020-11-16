@@ -17,11 +17,13 @@ func destinationServer() (u string, s string) {
 
 func copyMyCNF(uAccount, mysqlS string) {
 	copyMyCNFCommand := ("sshpass -f \"/tmp/j\" scp /home/hch/mysql/my.cnf " + uAccount + "@" + mysqlS + ":/tmp")
-	//	fmt.Println(copyMyCNFCommand)
+	fmt.Println(copyMyCNFCommand)
 	_, err := exec.Command("bash", "-c", copyMyCNFCommand).Output()
 
 	if err != nil {
 		fmt.Println("\n ❌  Couldn't copy my.cnf into MySQL Server /tmp")
+		fmt.Println(err)
+		panic(err)
 	}
 }
 func copyRMPs(uAccount, mysqlS string) {
@@ -31,6 +33,7 @@ func copyRMPs(uAccount, mysqlS string) {
 
 	if err != nil {
 		fmt.Println("\n ❌  Couldn't copy RPM files into MySQL Server /tmp")
+		panic(err)
 	}
 }
 
@@ -41,6 +44,7 @@ func copyClustercheck(uAccount, mysqlS string) {
 
 	if err != nil {
 		fmt.Println("\n ❌  Couldn't copy clustercheck files into MySQL Server /tmp")
+		panic(err)
 	}
 }
 func copyNrpe(uAccount, mysqlS string) {
@@ -50,29 +54,29 @@ func copyNrpe(uAccount, mysqlS string) {
 
 	if err != nil {
 		fmt.Println("\n ❌  Couldn't copy nrpe.service into MySQL Server /tmp")
+		panic(err)
 	}
 }
 
 func createPWDFile() {
 	var u string
-	f, err := os.Create("/tmp/j")
-	if err != nil {
+	f, err1 := os.Create("/tmp/j")
+	if err1 != nil {
 		fmt.Println("\n ❌  Could not create \"/tmp/j\" file! ")
-		return
+		panic(err1)
 	}
 	fmt.Printf("\nEnter your password for ssh: ")
 	fmt.Scanln(&u)
 	f.WriteString(u)
-	err = f.Close()
-	if err != nil {
-		fmt.Println(err)
-		return
+	err2 := f.Close()
+	if err2 != nil {
+		panic(err2)
 	}
 	// check if file exists
-	_, err = os.Stat("/tmp/j")
-	if os.IsNotExist(err) {
+	_, err3 := os.Stat("/tmp/j")
+	if os.IsNotExist(err3) {
 		fmt.Println("\n ❌  \"/tmp/j\" file does not exist! ")
-		return
+		panic(err3)
 	}
 }
 
