@@ -330,5 +330,23 @@ func main() {
 	changingMyCNFFile(serverid)
 	turnOFFautorestarts()
 	startMySQL()
-	updatesAndGrants()
+	appendSkipGrantTables()
+	//updatesAndGrants()
 }
+
+//to add - PENDING:
+/*
+la funcion updatesAndGrants() podria elminarse. forget reading the temp password!
+Pendings: 
+	Run:
+		systemctl restart mysql
+		mysql
+		UPDATE mysql.user SET authentication_string = PASSWORD('wejk23#1'), password_expired = 'N' WHERE User = 'root' AND Host = 'localhost';
+		FLUSH PRIVILEGES;
+		exit;
+	Disable skip-grant-tables in /etc/my.cnf
+	Run:
+		systemctl restart mysql
+		mysql -uroot -p
+		<wejk23#1>
+*/
