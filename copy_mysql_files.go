@@ -21,12 +21,10 @@ func copyMyCNF(uAccount, mysqlS string) {
 	_, err := exec.Command("bash", "-c", copyMyCNFCommand).Output()
 
 	if err != nil {
-		fmt.Println("error  ! ")
-		fmt.Println(err)
-		/*	fmt.Println("\n ❌  Couldn't copy my.cnf into MySQL Server /tmp")
-			fmt.Println("\n ❌  Please check: ")
-			fmt.Println("\n ❌  1) Is sshpass installed? yum install -y sshpass")
-			fmt.Println("\n ❌  2) Have you ssh to the server before?")*/
+		fmt.Println("\n ❌  Couldn't copy my.cnf into MySQL Server /tmp")
+		fmt.Println("\n ❌  Please check: ")
+		fmt.Println("\n ❌  1) Is sshpass installed? yum install -y sshpass")
+		fmt.Println("\n ❌  2) Have you ssh to the server before?")
 		panic(err)
 	}
 }
