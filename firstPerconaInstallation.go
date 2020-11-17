@@ -338,6 +338,7 @@ func main() {
 /*
 la funcion updatesAndGrants() podria elminarse. forget reading the temp password!
 Pendings: 
+	Enable skip-grant-tables in /etc/my.cnf
 	Run:
 		systemctl restart mysql
 		mysql
@@ -347,6 +348,8 @@ Pendings:
 	Disable skip-grant-tables in /etc/my.cnf
 	Run:
 		systemctl restart mysql
-		mysql -uroot -p
-		<wejk23#1>
+		login mysql -uroot -p  <wejk23#1> 
+		SET GLOBAL validate_password_policy = LOW;
+		FLUSH PRIVILEGES;
+Then run the 2nd. script
 */
